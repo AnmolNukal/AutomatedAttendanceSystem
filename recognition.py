@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-import xlwrite
 import time
 import sys
 
@@ -8,7 +7,10 @@ start = time.time()
 period = 8
 face_cas = cv2.CascadeClassifier(
     'haarcascade_frontalface_default.xml')
-cap = cv2.VideoCapture("video.mp4")
+
+# replace 0 with any video file
+
+cap = cv2.VideoCapture(0)
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read("C:/Users/anmol/OneDrive/Desktop/BE Project/trainer.yml")
 flag = 0
@@ -19,6 +21,8 @@ dict = {
 }
 
 font = cv2.FONT_HERSHEY_SIMPLEX
+f = open("myfile.txt", "w")
+
 while True:
     ret, img = cap.read()
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -28,10 +32,21 @@ while True:
         cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
         id, conf = recognizer.predict(roi_gray)
         if (conf < 50):
-
             if (id == 25):
                 id = 'JOHN'
                 print("John Doe")
+            if (id == 57):
+                id = 'Anmol'
+                print("Anmol")
+                f.write("Anmol Present")
+                break
+            if (id == 6):
+                id = 'Anita'
+                print("Anita")
+            if (id == 10):
+                id = 'Test'
+                print("Test Doe")
+                break
 
         else:
             id = 'Unknown, can not recognize'
@@ -50,6 +65,7 @@ while True:
         break
     if cv2.waitKey(100) & 0xFF == ord('q'):
         break
+
 
 cap.release()
 cv2.destroyAllWindows()
