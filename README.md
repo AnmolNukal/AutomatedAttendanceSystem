@@ -1,6 +1,6 @@
 # AutomatedAttendanceSystem
 
-Install python & pip
+Install python & pip.
 pip install opencv-contrib-python numpy
 
 1)Open CMD
