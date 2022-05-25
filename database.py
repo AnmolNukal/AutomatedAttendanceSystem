@@ -18,7 +18,7 @@ face_detector = cv2.CascadeClassifier(
 
 count = 0
 
-checkPath("C:/Users/anmol/OneDrive/Desktop/BE Project/dataSet/")
+checkPath("C:\\Users\\anmol\\OneDrive\\Desktop\\Projects\\Final Year Project\\AutomatedAttendanceSystem\\datasets")
 
 while (True):
     _, image_frame = camera.read()

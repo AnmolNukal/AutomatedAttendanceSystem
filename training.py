@@ -28,4 +28,4 @@ def getImagesAndLabels(path):
 faces, Ids = getImagesAndLabels("datasets")
 s = recognizer.train(faces, np.array(Ids))
 print("Training Complete")
-recognizer.write("C:/Users/anmol/OneDrive/Desktop/BE Project/trainer.yml")
+recognizer.write("C:\\Users\\anmol\\OneDrive\\Desktop\\Projects\\Final Year Project\\AutomatedAttendanceSystem\\trainer.yml")

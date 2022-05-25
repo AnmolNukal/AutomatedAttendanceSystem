@@ -10,9 +10,9 @@ face_cas = cv2.CascadeClassifier(
 
 # replace 0 with any video file
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0 , cv2.CAP_DSHOW)
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-recognizer.read("C:/Users/anmol/OneDrive/Desktop/BE Project/trainer.yml")
+recognizer.read("C:\\Users\\anmol\\OneDrive\\Desktop\\Projects\\Final Year Project\\AutomatedAttendanceSystem\\trainer.yml")
 flag = 0
 id = 0
 filename = 'filename'
@@ -21,7 +21,7 @@ dict = {
 }
 
 font = cv2.FONT_HERSHEY_SIMPLEX
-f = open("myfile.txt", "w")
+f = open("myfile.txt", "a")
 
 while True:
     ret, img = cap.read()
@@ -32,25 +32,12 @@ while True:
         cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
         id, conf = recognizer.predict(roi_gray)
         if (conf < 50):
-            if (id == 25):
-                id = 'JOHN'
-                print("John Doe")
-            if (id == 57):
-                id = 'Anmol'
-                print("Anmol")
-                f.write("Anmol Present")
-                break
-            if (id == 6):
-                id = 'Anita'
-                print("Anita")
-            if (id == 10):
-                id = 'Test'
-                print("Test Doe")
-                break
-
+            f.write(" %d present \n" %id)
+            flag = 1
+            
         else:
             id = 'Unknown, can not recognize'
-            flag = flag + 1
+            flag = flag + 2
             break
 
         cv2.putText(img, str(id) + " " + str(conf),
@@ -58,9 +45,13 @@ while True:
         # cv2.cv.PutText(cv2.cv.fromarray(img),str(id),(x,y+h),font,(0,0,255));
     cv2.imshow('frame', img)
     # cv2.imshow('gray',gray);
-    if flag == 10:
-        print("Transaction Blocked")
+    if flag == 1:
+        print("Attendance Noted")
         break
+    elif flag >10 :
+        print("Try Again")
+        flag = flag + 10
+        exit()
     if time.time() > start + period:
         break
     if cv2.waitKey(100) & 0xFF == ord('q'):
