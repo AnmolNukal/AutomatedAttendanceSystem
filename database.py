@@ -11,14 +11,16 @@ def checkPath(path):
 
 
 face_id = input('Enter your roll no ')
-camera = cv2.VideoCapture(0)
+#camera = cv2.VideoCapture("video(2).mp4")
+
+camera = cv2.VideoCapture(0,cv2.CAP_DSHOW)
 
 face_detector = cv2.CascadeClassifier(
     'haarcascade_frontalface_default.xml')
 
 count = 0
 
-checkPath("C:/Users/anmol/OneDrive/Desktop/BE Project/dataSet/")
+checkPath("C:\\Users\\anmol\\OneDrive\\Desktop\\Projects\\Final Year Project\\AutomatedAttendanceSystem\\datasets")
 
 while (True):
     _, image_frame = camera.read()
